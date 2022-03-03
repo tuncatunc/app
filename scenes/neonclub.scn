@@ -1,0 +1,45 @@
+{
+  "objects": [
+    {
+      "type": "application/light",
+      "content": {
+        "lightType": "ambient",
+        "args": [[255, 255, 255], 2]
+      }
+    },
+    {
+      "type": "application/light",
+      "content": {
+        "lightType": "directional",
+        "args": [[255, 255, 255], 2],
+        "position": [1, 2, 3]
+      }
+    },
+    {
+      "position": [
+        0,
+        100,
+        0
+      ],
+      "quaternion": [
+        0,
+        0.7071067811865475,
+        0,
+        0.7071067811865475
+      ],
+      "start_url": "https://webaverse.github.io/app/public/avatars/scillia_drophunter_v15_vian.vrm",
+      "dynamic": false,
+      "physics": false
+    },
+    {
+      "position": [
+        0,
+        -100,
+        0
+      ],
+      "physics": false,
+      "start_url": "/metaverse_modules/neon-club/",
+      "dynamic": false
+    }
+  ]
+}
