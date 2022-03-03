@@ -4,13 +4,16 @@
 /* eslint-disable linebreak-style */
 import metaversefile from 'metaversefile'
 import * as THREE from 'three'
-// import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
-// import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
-// import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
-// import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js'
+import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js'
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js'
+import { GlitchPass} from 'three/examples/jsm/postprocessing/GlitchPass.js'
+import { BokehPass} from 'three/examples/jsm/postprocessing/BokehPass.js'
+
 // import { BlendShader } from 'three/examples/jsm/shaders/BlendShader.js'
 // import { SavePass } from 'three/examples/jsm/postprocessing/SavePass.js'
-// import { getComposer } from '../../renderer.js'
+import { getComposer } from '../../renderer.js'
 // import { Earthquake } from './passes/Earthquake.js'
 import {
   createAudio,
@@ -66,9 +69,24 @@ export default (e) => {
   app.name = 'neon-club'
   // console.log(useInternals())
 
-  // const rootScene = useInternals().rootScene
-  // const camera = useInternals().camera
-  // const composer = getComposer()
+  const rootScene = useInternals().rootScene
+  const camera = useInternals().camera
+  const composer = getComposer()
+
+  // tunca 
+  composer.addPass(new RenderPass(rootScene, camera))
+  composer.addPass(new UnrealBloomPass({x:1024, y:1024}, 2, 0.4, 0.85))
+  const bokehPass = new BokehPass( rootScene, camera, {
+    focus: 1.0,
+    aperture: 0.025,
+    maxblur: 0.001,
+
+    width: 1024,
+    height: 1024
+  } );
+  composer.addPass(bokehPass);
+  // composer.addPass(new GlitchPass());
+  GlitchPass
   const gl = useInternals().renderer
   const physics = usePhysics()
   gl.outputEncoding = THREE.sRGBEncoding
